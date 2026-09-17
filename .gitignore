@@ -1,0 +1,14 @@
+# Credentials and environment configuration
+.env
+
+# Python cache & logs
+__pycache__/
+*.py[cod]
+*.log
+
+# Docker local data
+.wine/
+
+# OS store files
+.DS_Store
+Thumbs.db

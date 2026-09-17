@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  scalping_bot:
+    build: .
+    container_name: mt5_scalping_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
