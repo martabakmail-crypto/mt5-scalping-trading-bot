@@ -9,6 +9,12 @@ sleep 2
 
 WINE_BIN=$(which wine || echo "wine")
 
+if [ ! -f "/root/.wine/drive_c/windows/system32/ucrtbase.dll" ]; then
+    echo "Installing Microsoft VC++ Runtime (vcrun2015) via Winetricks..."
+    winetricks -q vcrun2015 || true
+    sleep 3
+fi
+
 if [ ! -f "/root/.wine/drive_c/Python311/python.exe" ]; then
     echo "Initializing Wine prefix..."
     wineboot --init || true
@@ -27,10 +33,17 @@ if [ ! -f "/root/.wine/drive_c/Python311/python.exe" ]; then
     wget -q https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py
     $WINE_BIN "C:\\Python311\\python.exe" /tmp/get-pip.py || true
     rm -f /tmp/get-pip.py
+
+    echo "Installing MetaTrader 5 Terminal client..."
+    if [ -f "/opt/mt5/mt5setup.exe" ]; then
+        $WINE_BIN /opt/mt5/mt5setup.exe /auto || true
+    fi
 fi
 
-echo "Installing/Ensuring compatible Python dependencies (numpy<2.0.0)..."
+
+echo "Installing/Ensuring compatible Python dependencies..."
 $WINE_BIN "C:\\Python311\\python.exe" -m pip install --no-cache-dir -r /app/requirements.txt || true
 
 echo "Starting MT5 Scalping Trading Bot Engine..."
-exec $WINE_BIN "C:\\Python311\\python.exe" /app/main.py
+exec $WINE_BIN cmd /c "set PYTHONPATH=Z:\app&& C:\Python311\python.exe Z:\app\main.py"
+

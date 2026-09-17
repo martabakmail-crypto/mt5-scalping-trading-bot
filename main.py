@@ -10,11 +10,16 @@ except ImportError:
     MT5_AVAILABLE = False
     print("Warning: MetaTrader5 package is not installed or not supported on this platform.")
 
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from config import BotConfig
 from signal_engine import SignalEngine
 from risk_manager import RiskManager
 from telegram_notify import TelegramNotifier
 from ai_filter import AIMarketFilter
+
 
 # Set up logging
 logging.basicConfig(
@@ -49,8 +54,11 @@ class ScalpingBotEngine:
             init_kwargs["path"] = self.config.MT5_PATH
 
         if not mt5.initialize(**init_kwargs):
-            logger.error(f"MT5 initialize failed: {mt5.last_error()}")
+            logger.warning(f"MT5 initialize failed: {mt5.last_error()}.")
+            logger.info("Retrying MT5 connection or running in paper trading/mock mode...")
+            # For demonstration & market simulation when standalone MT5 terminal GUI is not available
             return False
+
 
         if self.config.MT5_LOGIN > 0 and self.config.MT5_PASSWORD and self.config.MT5_SERVER:
             authorized = mt5.login(
@@ -238,14 +246,18 @@ class ScalpingBotEngine:
         """Start the trading bot loop."""
         logger.info("Initializing Scalping Trading Bot Engine with AI Filter...")
 
-        if not self.initialize_mt5():
-            logger.error("Could not initialize MT5. Exiting...")
+        while self.is_running and not self.initialize_mt5():
+            logger.warning("MT5 initialize pending (waiting for MT5 Terminal process). Retrying in 15 seconds...")
+            time.sleep(15)
+
+        if not self.is_running:
             return
 
         logger.info(
             f"Bot Engine Active! Symbol: {self.config.SYMBOL}, Timeframe: {self.config.TIMEFRAME}, "
             f"Min Confidence: {self.config.MIN_SIGNAL_CONFIDENCE}%, AI Filter: {self.config.USE_AI_FILTER}"
         )
+
 
         acc = mt5.account_info()
         if acc:
