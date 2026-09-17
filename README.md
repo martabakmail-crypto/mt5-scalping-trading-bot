@@ -50,16 +50,17 @@ Isi variabel:
 - `TELEGRAM_BOT_TOKEN` & `TELEGRAM_CHAT_ID` (dari `@BotFather`)
 
 ### 3. Pastikan Terminal MT5 Aktif
-- Unduh & Install **MetaTrader 5 Desktop Client** langsung dari **Exness Personal Area** atau Help Center Exness:
-  - **Exness Personal Area:** Login ke web Exness -> Menu **Platforms** -> Klik **Download MetaTrader 5**.
+- **Catatan Device:** Jika Anda membuka web Exness dari Mac / HP, situs Exness otomatis menyembunyikan tombol Windows dan hanya menampilkan versi Mac/Android.
+- **Link Langsung MT5 Windows (`mt5setup.exe`):**
+  - **Direct Installer (.exe):** [https://dl.icmarkets.com/setups/icmarkets5setup.exe](https://dl.icmarkets.com/setups/icmarkets5setup.exe) *(Dapat digunakan untuk login ke server Exness)*
   - **Exness Help Center:** [https://get.exness.help/hc/en-us/articles/360007204911-MetaTrader-5-MT5-](https://get.exness.help/hc/en-us/articles/360007204911-MetaTrader-5-MT5-)
-  - **Mirror Broker Alternatif (Tanpa Blokir):** [https://www.xm.com/mt5](https://www.xm.com/mt5) atau [https://fbs.com/trading/platforms/metatrader5](https://fbs.com/trading/platforms/metatrader5)
 - Buka aplikasi **MetaTrader 5** dan Login ke akun Exness Anda:
   - **Server:** `Exness-MT5Trial` (atau server akun Exness Anda)
   - **Login:** ID Akun Anda (misal `416378891`)
   - **Password:** Password akun trading Anda
 - Pastikan opsi **"Allow Algo Trading"** sudah dicentang di MT5 (Tools -> Options -> Expert Advisors).
 - Pastikan simbol `XAUUSD` / `XAUUSDc` sudah ditambahkan ke daftar **Market Watch** MT5.
+
 
 
 
