@@ -50,9 +50,14 @@ Isi variabel:
 - `TELEGRAM_BOT_TOKEN` & `TELEGRAM_CHAT_ID` (dari `@BotFather`)
 
 ### 3. Pastikan Terminal MT5 Aktif
-- Buka aplikasi **MetaTrader 5** di PC/VPS Anda.
+- Unduh & Install **MetaTrader 5 Desktop Client** resmi dari MetaQuotes: [MT5 Desktop Installer](https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe).
+- Buka aplikasi **MetaTrader 5** dan Login ke akun Exness Anda:
+  - **Server:** `Exness-MT5Trial` (atau server akun Exness Anda)
+  - **Login:** ID Akun Anda (misal `416378891`)
+  - **Password:** Password akun trading Anda
 - Pastikan opsi **"Allow Algo Trading"** sudah dicentang di MT5 (Tools -> Options -> Expert Advisors).
-- Pastikan simbol `XAUUSDc` sudah ditambahkan ke daftar **Market Watch** MT5.
+- Pastikan simbol `XAUUSD` / `XAUUSDc` sudah ditambahkan ke daftar **Market Watch** MT5.
+
 
 ### 4. Jalankan Bot
 ```bash
